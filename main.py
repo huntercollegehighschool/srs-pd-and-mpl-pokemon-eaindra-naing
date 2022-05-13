@@ -7,13 +7,17 @@ import matplotlib.pyplot as plt
 
 pokedex = pd.read_csv("pokedex.csv", index_col=1)
 
+
 """
 Below is some code that first calculates how many of each type of Pokemon currently exists. Note that a Pokemon like Bulbasaur has two types, Grass and Poison, so we want that to accounted for in both the Grass and the Poison counts.
 """
+#count how many of each pokemon type there is
+
 type1count = pokedex['type_1'].value_counts()
 type2count = pokedex['type_2'].value_counts()
 
 typecount = (type1count + type2count).sort_values(ascending=False)
+print (typecount)
 
 """
 1. Print what's in the typecount variable so that we can see a table (series) of how many of each type there are.
@@ -25,9 +29,9 @@ What is the most abundant type of Pokemon?
 
 """
 2. Let's use matplotlib to create a bar chart that shows visually how many of each type there are. Use and run the code below.
-fig = plt.figure(figsize=(6, 3))
+fig = plt.figure(figsize=(15, 10))
 typecount.plot.bar()
-plt.show()
+plt.show()  #displays the plot window
 """
 
 
@@ -36,7 +40,9 @@ Each Pokemon has 6 different stats: HP, ATTACK, DEFENSE, SPECIAL ATTACK, SPECIAL
 """
 tp1 = pokedex[['type_1', 'total_points']].groupby('type_1').agg(['size', 'mean'])
 tp2 = pokedex[['type_2', 'total_points']].groupby('type_2').agg(['size', 'mean'])
-totalpoints = (tp1['total_points']['mean']*tp1['total_points']['size'] + tp2['total_points']['mean']*tp2['total_points']['size'])/(tp1['total_points']['size']+tp2['total_points']['size'])  # uses a weighted average since averages had to be calculated using data from two different columns
+totalpoints = (tp1['total_points']['mean']*tp1['total_points']['size'] + tp2['total_points']['mean']*tp2['total_points']['size'])/(tp1['total_points']['size']+tp2['total_points']['size']) 
+# uses a weighted average since averages had to be calculated using data from two different columns
+# weighted average of type 1 and type 2
 
 """
 3. Print totalpoints and see what appears on the console.
